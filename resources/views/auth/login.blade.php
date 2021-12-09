@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="mt-20 flex justify-center mb-40">
-    <div class="mr-12">
-        <a href="/"><img class="" src="{{ asset('img/project_logo.png') }}" alt="Logo"></a>
+    <div class="lg:block hidden">
+        <img class="" src="{{ asset('img/project_logo.png') }}" alt="Logo">
         <p class="w-2/4 text-5xl pt-10 font-bold">A Merchant Friendly Admin Panel</p>
     </div>
-    <div class="rounded border border-gray-300 p-10 bg-white shadow-sm sm:rounded-lg">
+    <div class="rounded border border-gray-300 p-10 bg-white shadow-2xl sm:rounded-lg lg:w-3/12 sm:w-full">
         <a href="/"><img class="" src="{{ asset('img/project_logo.png') }}" alt="Logo"></a>
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -21,7 +21,7 @@
             <div class="mt-4">
                 <label for="email">
                     Email
-                    <input id="email" class="block mt-1 w-full rounded" type="email" name="email" :value="old('email')" required autofocus />
+                    <input id="email" class="form-input block mt-1 w-full rounded-3xl" type="email" name="email" :value="old('email')" required autofocus />
                 </label>
             </div>
 
@@ -29,7 +29,7 @@
             <div class="mt-4">
                 <label for="password">
                     Password
-                    <input id="password" class="block mt-1 w-full rounded"
+                    <input id="password" class="form-input block mt-1 w-full rounded-3xl"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
@@ -39,7 +39,7 @@
             <!-- Remember Me -->
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
+                    <input id="remember_me" type="checkbox" class="form-checkbox rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
