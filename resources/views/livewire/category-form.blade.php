@@ -8,7 +8,7 @@
                 <div class="flex mb-4">
                     <div class="w-1/4">
                         <label>
-                        Product Category
+                        Product Category <i class="text-red-400">*</i>
                         </label>
                     </div>
                     

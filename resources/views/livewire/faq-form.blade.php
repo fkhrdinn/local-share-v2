@@ -10,20 +10,21 @@
         <div class="mt-4">
             <div class="flex mb-4">
                 <div class="w-1/4">
-                    <label for="title">
-                    Title
+                    <label> 
+                    Title <i class="text-red-400">*</i>
                     </label>
                 </div>
 
                 <div class="w-3/4">
-                    <input wire:model.debounce.500ms="title" id="title" type="text" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                    <input wire:model.debounce.500ms="title" type="text" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                    @error('title') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                 </div>
             </div>
 
             <div class="flex mb-4">
                 <div class="w-1/4">
-                    <label for="description">
-                    Description
+                    <label>
+                    Description <i class="text-red-400">*</i>
                     </label>
                 </div>
 
@@ -35,15 +36,25 @@
                         wire:key="desc"
                     >
                     </trix-editor>
+                    @error('description') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                 </div>
             </div>
 
+            @if(!$faq)
             <div class="flex mb-4">
                 <div class="w-1/4"></div>
                 <div class="w-3/4">
                     <input wire:click.prevent="create" type="submit" class="rounded-3xl w-full text-white hover:bg-green-700 bg-green-500 cursor-pointer h-10" value="Create">
                 </div>
             </div>
+            @else
+            <div class="flex mb-4">
+                <div class="w-1/4"></div>
+                <div class="w-3/4">
+                    <input wire:click.prevent="update" type="submit" class="rounded-3xl w-full text-white hover:bg-green-700 bg-green-500 cursor-pointer h-10" value="Update">
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </div>

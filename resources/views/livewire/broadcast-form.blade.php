@@ -10,20 +10,21 @@
             <div class="mt-4">
                 <div class="flex mb-4">
                     <div class="w-1/4">
-                        <label for="subject">
-                        Subject
+                        <label>
+                        Subject <i class="text-red-400">*</i>
                         </label>
                     </div>
 
                     <div class="w-3/4">
-                        <input wire:model.debounce.500ms="subject" id="subject" type="text" class="form-input rounded-3xl w-full dark:bg-gray-600" autocomplete="off" required>
+                        <input wire:model.debounce.500ms="subject" type="text" class="form-input rounded-3xl w-full dark:bg-gray-600" autocomplete="off" required>
+                        @error('subject') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
                 <div class="flex mb-4">
                     <div class="w-1/4">
-                        <label for="message">
-                        Message
+                        <label>
+                        Message <i class="text-red-400">*</i>
                         </label>
                     </div>
 
@@ -35,12 +36,13 @@
                             wire:key="desc"
                         >
                         </trix-editor>
+                        @error('message') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
                 <div class="flex mb-4">
                     <div class="w-1/4">
-                        <label for="email">
+                        <label>
                         Email
                         <p class="text-gray-400 text-sm">Selected Email(s) -> {{ count($checkedEmail) + count($allEmailCount) }}</p>
                         </label>
@@ -89,6 +91,7 @@
 
                         <div class="w-3/4">
                             <input wire:model.debounce.500ms="scheduleDate" type="datetime-local" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                            @error('scheduleDate') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -121,7 +124,7 @@
                 <div class="p-6 space-y-6">
                     <div class="flex mb-4">
                         <div class="w-2/4">
-                            <label for="searchEmail">
+                            <label>
                             Search Email
                             <p class="text-gray-400 text-sm">Selected Email(s) -> {{ count($checkedEmail) + count($allEmailCount) }}</p>
                             </label>

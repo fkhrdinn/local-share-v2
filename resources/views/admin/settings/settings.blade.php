@@ -6,9 +6,9 @@
 </div>
 
 <div>
-    <div class="py-12 md:w-1/2 w-full">
+    <div class="py-12 w-full">
         <div class="md:px-6 sm:px-4 lg:px-8">
-            <livewire:settings/>
+            <livewire:settings :user="$user"/>
         </div>
     </div>
 </div>

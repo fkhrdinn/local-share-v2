@@ -13,12 +13,13 @@
                         <div class="flex mb-4">
                             <div class="w-1/4">
                                 <label>
-                                Product Name
+                                Product Name <i class="text-red-400">*</i>
                                 </label>
                             </div>
                             
                             <div class="w-3/4">
                                 <input wire:model.debounce.500ms="productName" type="text" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                                @error('productName') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
@@ -37,30 +38,33 @@
                                     wire:key="desc"
                                 >
                                 </trix-editor>
+                                @error('productDescription') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <div class="flex mb-4">
                             <div class="w-1/4">
                                 <label>
-                                Normal Price
+                                Normal Price <i class="text-red-400">*</i>
                                 </label>
                             </div>
 
                             <div class="w-3/4">
                                 <input wire:model.debounce.500ms="price" type="number" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                                @error('price') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <div class="flex mb-4">
                             <div class="w-1/4">
                                 <label>
-                                Stock
+                                Stock <i class="text-red-400">*</i>
                                 </label>
                             </div>
 
                             <div class="w-3/4">
                                 <input wire:model.debounce.500ms="stock" type="number" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                                @error('stock') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div> 
@@ -81,12 +85,13 @@
                             <div class="flex mb-4">
                                 <div class="w-1/4">
                                     <label>
-                                    Cover Photo
+                                    Cover Photo <i class="text-red-400">*</i>
                                     </label>
                                 </div>
 
                                 <div class="w-3/4">
                                     <input wire:model="coverPhoto" type="file" class="form-input rounded-3xl w-full shadow-xl dark:bg-gray-400" required>
+                                    @error('coverPhoto') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -128,6 +133,7 @@
 
                                 <div class="w-3/4">
                                     <input wire:model="productImage" type="file" class="form-input rounded-3xl w-full shadow-xl dark:bg-gray-400" multiple>
+                                    @error('productImage') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -170,7 +176,7 @@
                         <div class="flex mb-4">
                             <div class="w-1/4">
                                 <label>
-                                Product Category
+                                Product Category <i class="text-red-400">*</i>
                                 </label>
                             </div>
 
@@ -181,6 +187,7 @@
                                     <option value="{{$type->id}}"> {{$type->type}} </option>
                                 @endforeach
                                 </select>
+                                @error('category') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>

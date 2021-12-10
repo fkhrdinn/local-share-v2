@@ -95,50 +95,43 @@ class VoucherTable extends PowerGridComponent
                 ->title(__('CODE'))
                 ->field('code')
                 ->searchable()
-                ->makeInputText()
-                ->editOnClick(),
+                ->makeInputText(),
 
             Column::add()
                 ->title(__('QUANTITY'))
                 ->field('quantity')
-                ->makeInputRange()
-                ->editOnClick(),
+                ->makeInputRange(),
 
             Column::add()
                 ->title(__('VALUE'))
                 ->field('value')
                 ->sortable()
-                ->searchable()
-                ->editOnClick(),
+                ->searchable(),
 
             Column::add()
                 ->title(__('TYPE'))
                 ->field('type')
                 ->sortable()
                 ->searchable()
-                ->makeInputText()
-                ->editOnClick(),
+                ->makeInputText(),
 
             Column::add()
                 ->title(__('EXPIRES AT'))
                 ->field('expires_at_formatted')
                 ->searchable()
-                ->makeInputDatePicker('expires_at')
-                ->editOnClick(),
+                ->makeInputDatePicker('expires_at'),
 
             Column::add()
                 ->title(__('EFFECTIVE AT'))
                 ->field('effective_at_formatted')
                 ->searchable()
-                ->makeInputDatePicker('effective_at')
-                ->editOnClick(),
+                ->makeInputDatePicker('effective_at'),
 
             Column::add()
                 ->title(__('MIN AMOUNT'))
                 ->field('min_amount')
                 ->sortable()
-                ->searchable()
-                ->editOnClick(),
+                ->searchable(),
         ]
 ;
     }
@@ -155,10 +148,10 @@ class VoucherTable extends PowerGridComponent
     public function actions(): array
     {
        return [
-           /* Button::add('edit')
+           Button::add('edit')
                ->caption(__('Edit'))
-               ->class('bg-indigo-500 text-white')
-               ->route('voucher.edit', ['voucher' => 'id']), */
+               ->class('bg-indigo-500 text-sm rounded-3xl text-white p-1 px-2 hover:bg-indigo-900')
+               ->route('voucher.edit', ['voucher' => 'id']), 
 
            Button::add('destroy')
                ->caption(__('Delete'))

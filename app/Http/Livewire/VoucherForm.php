@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use DateTime;
 use App\Models\Voucher;
 use Livewire\Component;
 
 class VoucherForm extends Component
 {
+    public $voucher;
     public $code;
     public $quantity;
     public $types = [
@@ -35,10 +37,60 @@ class VoucherForm extends Component
         return $rules;
     }
 
+    public function mount($voucher = null)
+    {
+        $this->voucher = $voucher ?? [];
+        if(!is_null($voucher))
+        {
+            $expire;
+            $effective;
+            
+            $this->voucher = Voucher::find($voucher);
+            $this->code = $this->voucher->code;
+            $this->quantity = $this->voucher->quantity;
+            $this->value = $this->voucher->value;
+            $this->type = $this->voucher->type;
+            $expire = new DateTime($this->voucher->expires_at);
+            $this->expires_at = $expire->format('Y-m-d');
+            $effective = new DateTime($this->voucher->effective_at);
+            $this->effective_at = $effective->format('Y-m-d');
+            $this->min_amount = $this->voucher->min_amount;
+        }
+    }
+
+    public function update()
+    {
+        $this->validate([
+            'quantity' => 'required|integer',
+            'value' => 'required|numeric',
+            'type' => 'required|string',
+            'expires_at' => 'required|date',
+            'min_amount' => 'nullable|numeric',
+        ]);
+
+        if(is_null($this->code))
+        {
+            $this->code = $this->generateCode();
+        }
+
+        Voucher::where('id', $this->voucher->id)
+        ->update([
+            'code' => strtoupper($this->code),
+            'quantity' => $this->quantity,
+            'value' => $this->value,
+            'type' => $this->type,
+            'effective_at' => $this->effective_at.' 00:00:00',
+            'expires_at' => $this->expires_at.' 23:59:59',
+            'min_amount' => $this->min_amount,
+        ]);
+
+        toast('Voucher has been updated successfully.','success')->autoClose(5000)->hideCloseButton();
+
+        return redirect()->to('/admin/voucher');
+    }
+
     public function create()
     {
-        $this->validate();
-
         if (is_null($this->code)) {
             $this->code = $this->generateCode();
         }

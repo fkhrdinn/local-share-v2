@@ -8,6 +8,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class FaqForm extends Component
 {
+    public $faq;
     public $title;
     public $description;
 
@@ -15,6 +16,31 @@ class FaqForm extends Component
         'title' => 'required|string|max:255',
         'description' => 'required|string',
     ];
+
+    public function mount($faq = null)
+    {
+        $this->faq = $faq ?? [];
+        if(!is_null($faq))
+        {
+            $this->faq = Faq::find($faq);
+            $this->title = $this->faq->title;
+            $this->description = $this->faq->description;
+        }
+    }
+
+    public function update()
+    {
+        $this->validate();
+
+        Faq::where('id', $this->faq->id)
+        ->update([
+            'title' => $this->title,
+            'description' => $this->description,
+        ]);
+        
+        toast('Faq has been updated successfully.','success')->autoClose(5000)->hideCloseButton();
+        return redirect()->to('admin/faq');
+    }
 
     public function create()
     {

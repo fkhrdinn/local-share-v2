@@ -42,11 +42,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     //Voucher
     Route::get('/voucher', 'VoucherController@index')->name('voucher');
     Route::get('/voucher/create', 'VoucherController@create')->name('voucher.create');
+    Route::get('/voucher/{voucher}/edit', 'VoucherController@edit')->name('voucher.edit');
     Route::get('/voucher/{id}/delete', 'VoucherController@destroy')->name('voucher.destroy');
 
     //FAQ
     Route::get('/faq', 'FaqController@index')->name('faq');
     Route::get('/faq/create', 'FaqController@create')->name('faq.create');
+    Route::get('/faq/{faq}/edit', 'FaqController@edit')->name('faq.edit');
     Route::get('/faq/{id}/delete', 'FaqController@destroy')->name('faq.destroy');
 
     //Broadcast

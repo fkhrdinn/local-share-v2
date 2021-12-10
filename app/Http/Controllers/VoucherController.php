@@ -24,7 +24,17 @@ class VoucherController extends Controller
             ->where('key','dark_mode')
             ->value('value');
 
-        return view('admin.voucher.form', compact('data'));
+        $voucher = null;
+        return view('admin.voucher.form', compact('data', 'voucher'));
+    }
+
+    public function edit($voucher)
+    {
+        $data =  Preference::where('user_id', Auth::user()->id)
+            ->where('key','dark_mode')
+            ->value('value');
+
+        return view('admin.voucher.form', compact('data', 'voucher'));
     }
 
     public function destroy($id)

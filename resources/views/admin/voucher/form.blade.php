@@ -8,7 +8,11 @@
 <div>
     <div class="py-12">
         <div class="md:px-6 sm:px-4 lg:px-8">
+            @if(!$voucher)
             <livewire:voucher-form/>
+            @else
+            <livewire:voucher-form :voucher="$voucher"/>
+            @endif
         </div>
     </div>
 </div>

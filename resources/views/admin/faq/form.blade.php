@@ -8,7 +8,11 @@
 <div>
     <div class="py-12">
         <div class="md:px-6 sm:px-4 lg:px-8">
+            @if(!$faq)
             <livewire:faq-form/>
+            @else
+            <livewire:faq-form :faq="$faq"/>
+            @endif
         </div>
     </div>
 </div>

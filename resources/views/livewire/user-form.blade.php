@@ -8,36 +8,39 @@
                 <div class="flex mb-4">
                     <div class="w-1/4">
                         <label>
-                        Merchant's Name
+                        Merchant's Name <i class="text-red-400">*</i>
                         </label>
                     </div>
                     
                     <div class="w-3/4">
                         <input wire:model.debounce.500ms="merchantName" type="text" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                        @error('merchantName') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
                 <div class="flex mb-4">
                     <div class="w-1/4">
                         <label>
-                        Email
+                        Email <i class="text-red-400">*</i>
                         </label>
                     </div>
                     
                     <div class="w-3/4">
                         <input wire:model.debounce.500ms="email" type="text" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                        @error('email') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
                 <div class="flex mb-4">
                     <div class="w-1/4">
                         <label>
-                        Mobile Phone
+                        Mobile Phone <i class="text-red-400">*</i>
                         </label>
                     </div>
                     
                     <div class="w-3/4">
                         <input wire:model.debounce.500ms="mobileNumber" type="text" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                        @error('mobileNumber') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
@@ -51,12 +54,13 @@
                     <div class="flex mb-4">
                         <div class="w-1/4">
                             <label>
-                            Logo
+                            Profile Photo
                             </label>
                         </div>
 
                         <div class="w-3/4">
                             <input wire:model="logo" type="file" class="form-input rounded-3xl w-full shadow-xl dark:bg-gray-400" required>
+                            @error('logo') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
                     </div>
 

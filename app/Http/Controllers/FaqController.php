@@ -27,12 +27,22 @@ class FaqController extends Controller
         return redirect('/admin/faq');
     }
 
+    public function edit($faq)
+    {
+        $data =  Preference::where('user_id', Auth::user()->id)
+            ->where('key','dark_mode')
+            ->value('value');
+
+        return view('admin.faq.form', compact('data', 'faq'));
+    }
+
     public function create()
     {
         $data =  Preference::where('user_id', Auth::user()->id)
             ->where('key','dark_mode')
             ->value('value');
 
-        return view('admin.faq.form', compact('data'));
+        $faq = null;
+        return view('admin.faq.form', compact('data', 'faq'));
     }
 }

@@ -14,6 +14,8 @@ class SettingController extends Controller
             ->where('key','dark_mode')
             ->value('value');
 
-        return view('admin.settings.settings', compact('data'));
+        $user = Auth::user()->id;
+
+        return view('admin.settings.settings', compact('data', 'user'));
     }
 }

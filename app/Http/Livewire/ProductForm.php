@@ -99,7 +99,14 @@ class ProductForm extends Component
 
     public function update()
     {
-        /* $this->validate(); */
+        $this->validate([
+            'productName' => 'required|string|max:255',
+            'price' => 'required',
+            'stock' => 'integer|required',
+            'coverPhoto' => 'nullable|image|max:10024',
+            'productImage.*' => 'image|max:10024',
+            'category' => 'required|integer'
+        ]); 
 
         $model = $this->product;
 

@@ -94,16 +94,14 @@ class FaqTable extends PowerGridComponent
                 ->field('title')
                 ->sortable()
                 ->searchable()
-                ->makeInputText()
-                ->editOnClick(),
+                ->makeInputText(),
 
             Column::add()
                 ->title(__('DESCRIPTION'))
                 ->field('description')
                 ->sortable()
                 ->searchable()
-                ->makeInputText()
-                ->editOnClick(),
+                ->makeInputText(),
         ]
 ;
     }
@@ -120,10 +118,10 @@ class FaqTable extends PowerGridComponent
     public function actions(): array
     {
        return [
-           /* Button::add('edit')
+           Button::add('edit')
                ->caption(__('Edit'))
-               ->class('bg-indigo-500 text-white')
-               ->route('faq.edit', ['faq' => 'id']), */
+               ->class('bg-indigo-500 text-sm rounded-3xl text-white p-1 px-2 hover:bg-indigo-900')
+               ->route('faq.edit', ['faq' => 'id']), 
 
            Button::add('destroy')
                ->caption(__('Delete'))

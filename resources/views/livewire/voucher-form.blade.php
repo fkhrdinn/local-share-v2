@@ -16,19 +16,21 @@
                     </div>
 
                     <div class="w-3/4">
-                        <input wire:model.debounce.500ms="code" id="code" type="text" class="form-input uppercase rounded-3xl w-full dark:bg-gray-600">
+                        <input wire:model.debounce.500ms="code" type="text" class="form-input uppercase rounded-3xl w-full dark:bg-gray-600">
+                        @error('code') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
                 <div class="flex mb-4">
                     <div class="w-1/4">
-                        <label for="quantity">
+                        <label>
                         Redemption Quantity <i class="text-red-400">*</i>
                         </label>
                     </div>
 
                     <div class="w-3/4">
-                        <input wire:model.debounce.500ms="quantity" id="quantity" type="number" class="form-input rounded-3xl w-full dark:bg-gray-600" required> 
+                        <input wire:model.debounce.500ms="quantity" type="number" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                        @error('quantity') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror 
                     </div>
                 </div>
 
@@ -45,6 +47,7 @@
                                 <option value="{{ $key }}">{{ $type }}</option>
                             @endforeach
                         </select> 
+                        @error('type') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
@@ -56,52 +59,65 @@
                     </div>
 
                     <div class="w-3/4">
-                        <input wire:model.debounce.500ms="value" id="value" type="number" class="form-input rounded-3xl w-full dark:bg-gray-600" required> 
+                        <input wire:model.debounce.500ms="value" id="value" type="number" class="form-input rounded-3xl w-full dark:bg-gray-600" required>
+                        @error('value') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror 
                     </div>
                 </div>
             </div>
             <div class="mt-4 md:ml-12 sm:ml-0 md:w-1/2 sm:w-full">
                 <div class="flex mb-4">
                     <div class="w-1/4">
-                        <label for="min_amount">
+                        <label>
                         Minimum Amount
                         </label>
                     </div>
 
                     <div class="w-3/4">
-                        <input wire:model.debounce.500ms="min_amount" id="min_amount" type="number" class="form-input rounded-3xl w-full dark:bg-gray-600"> 
+                        <input wire:model.debounce.500ms="min_amount" type="number" class="form-input rounded-3xl w-full dark:bg-gray-600">
+                        @error('min_amount') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror 
                     </div>
                 </div>
 
                 <div class="flex mb-4">
                     <div class="w-1/4">
-                        <label for="effective_at">
+                        <label>
                         Effective Date <i class="text-red-400">*</i>
                         </label>
                     </div>
 
                     <div class="w-3/4">
-                        <input type="date" wire:model.debounce.500ms="effective_at" id="effective_at" class="form-input rounded-3xl w-full bg-gray-200 dark:bg-gray-600" required> 
+                        <input type="date" wire:model.debounce.500ms="effective_at" class="form-input rounded-3xl w-full bg-gray-200 dark:bg-gray-600" required>
+                        @error('effective_at') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror 
                     </div>
                 </div>
 
                 <div class="flex mb-4">
                     <div class="w-1/4">
-                        <label for="expires_at">
+                        <label>
                         Expire At <i class="text-red-400">*</i>
                         </label>
                     </div>
 
                     <div class="w-3/4">
-                        <input type="date" wire:model.debounce.500ms="expires_at" id="expires_at" class="form-input rounded-3xl w-full bg-gray-200 dark:bg-gray-600" required> 
+                        <input type="date" wire:model.debounce.500ms="expires_at" class="form-input rounded-3xl w-full bg-gray-200 dark:bg-gray-600" required>
+                        @error('expires_at') <span class="error text-red-400 text-sm">{{ $message }}</span> @enderror 
                     </div>
                 </div>
+                @if(!$voucher)
                 <div class="flex mb-4 mt-12">
                     <div class="w-1/4"></div>
                     <div class="w-3/4">
                         <input wire:click.prevent="create" type="submit" class="rounded-3xl w-full text-white hover:bg-green-700 bg-green-500 cursor-pointer h-10" value="Create">
                     </div>
                 </div>
+                @else
+                <div class="flex mb-4 mt-12">
+                    <div class="w-1/4"></div>
+                    <div class="w-3/4">
+                        <input wire:click.prevent="update" type="submit" class="rounded-3xl w-full text-white hover:bg-green-700 bg-green-500 cursor-pointer h-10" value="Update">
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@ class UserForm extends Component
     {
         $rules = [
             'merchantName' => 'required|string|max:255',
-            'email' => 'unique:users|required|',
+            'email' => 'unique:users,email|required',
             'mobileNumber' => 'required',
             'logo' => 'nullable|image|max:10024'
         ];
@@ -47,8 +47,14 @@ class UserForm extends Component
 
     public function update()
     {
-        /* $this->validate(); */
-        $user = Auth::user();
+        $this->validate([
+            'merchantName' => 'required|string|max:255',
+            'email' => 'email|required',
+            'mobileNumber' => 'required',
+            'logo' => 'nullable|image|max:10024'
+        ]);
+        
+        $user = $this->user;
         
         User::where('id', $this->user->id)
         ->update([
@@ -80,7 +86,7 @@ class UserForm extends Component
             }
         }
 
-        toast('User has been updated successfully.','success')->autoClose(5000)->hideCloseButton();
+        toast('Merchant has been updated successfully.','success')->autoClose(5000)->hideCloseButton();
 
         return redirect()->to('/admin/merchants');
     }
