@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Preference;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
     public function index()
     {
-        $data =  Preference::where('user_id', Auth::user()->id)
-            ->where('key','dark_mode')
-            ->value('value');
+        $data =  new DashboardController;
+        $data = $data->isDarkMode();
 
         $user = Auth::user()->id;
 

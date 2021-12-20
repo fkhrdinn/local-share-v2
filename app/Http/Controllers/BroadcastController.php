@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Broadcast;
 use App\Models\Preference;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 
 class BroadcastController extends Controller
 {
     public function index()
     {
-        $data =  Preference::where('user_id', Auth::user()->id)
-            ->where('key','dark_mode')
-            ->value('value');
+        $data =  new DashboardController;
+        $data = $data->isDarkMode();
 
         return view('admin.broadcast.broadcasts', compact('data'));
     }
@@ -28,9 +28,8 @@ class BroadcastController extends Controller
 
     public function create()
     {
-        $data =  Preference::where('user_id', Auth::user()->id)
-            ->where('key','dark_mode')
-            ->value('value');
+        $data =  new DashboardController;
+        $data = $data->isDarkMode();
 
         return view('admin.broadcast.form', compact('data'));
     }

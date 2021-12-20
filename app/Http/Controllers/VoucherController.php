@@ -5,24 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Voucher;
 use App\Models\Preference;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 
 class VoucherController extends Controller
 {
     public function index()
     {
-        $data =  Preference::where('user_id', Auth::user()->id)
-            ->where('key','dark_mode')
-            ->value('value');
+        $data =  new DashboardController;
+        $data = $data->isDarkMode();
 
         return view('admin.voucher.voucher', compact('data'));
     }
 
     public function create()
     {
-        $data =  Preference::where('user_id', Auth::user()->id)
-            ->where('key','dark_mode')
-            ->value('value');
+        $data =  new DashboardController;
+        $data = $data->isDarkMode();
 
         $voucher = null;
         return view('admin.voucher.form', compact('data', 'voucher'));
@@ -30,9 +29,8 @@ class VoucherController extends Controller
 
     public function edit($voucher)
     {
-        $data =  Preference::where('user_id', Auth::user()->id)
-            ->where('key','dark_mode')
-            ->value('value');
+        $data =  new DashboardController;
+        $data = $data->isDarkMode();
 
         return view('admin.voucher.form', compact('data', 'voucher'));
     }

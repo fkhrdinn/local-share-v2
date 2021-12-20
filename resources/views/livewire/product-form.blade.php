@@ -1,5 +1,10 @@
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/trix.css') }}">       
+<link rel="stylesheet" type="text/css" href="{{ asset('css/trix.css') }}">
+<style>
+    .trix-button-group.trix-button-group--file-tools, .trix-button--icon-heading-1, .trix-button--icon-quote {
+    display:none;
+}
+</style>       
 @endsection
 <div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-12">

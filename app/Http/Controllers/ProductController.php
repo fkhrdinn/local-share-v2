@@ -6,26 +6,23 @@ use App\Models\Product;
 use App\Models\Preference;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DashboardController;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $data =  Preference::where('user_id', Auth::user()->id)
-            ->where('key','dark_mode')
-            ->value('value');
-
+        $data =  new DashboardController;
+        $data = $data->isDarkMode();
         return view('admin.products.product', compact('data'));
     }
 
     public function create()
     {
-        $data =  Preference::where('user_id', Auth::user()->id)
-            ->where('key','dark_mode')
-            ->value('value');
+        $data =  new DashboardController;
+        $data = $data->isDarkMode();
         
         $product=null;
-
         return view('admin.products.form', compact('data','product'));
     }
 
@@ -39,9 +36,8 @@ class ProductController extends Controller
 
     public function edit($product)
     {
-        $data =  Preference::where('user_id', Auth::user()->id)
-            ->where('key','dark_mode')
-            ->value('value');
+        $data =  new DashboardController;
+        $data = $data->isDarkMode();
         
         return view('admin.products.form', compact('data','product'));
     }

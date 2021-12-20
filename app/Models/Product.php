@@ -24,4 +24,9 @@ class Product extends Model implements HasMedia
     {
         return $this->belongsTo(User::class);
     }
+
+    public function items()
+    {
+        return $this->hasMany(InvoiceItem::class);
+    }
 }

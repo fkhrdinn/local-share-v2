@@ -1,5 +1,10 @@
 @section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/trix.css') }}">       
+<link rel="stylesheet" type="text/css" href="{{ asset('css/trix.css') }}">
+<style>
+    .trix-button-group.trix-button-group--file-tools, .trix-button--icon-heading-1, .trix-button--icon-quote {
+    display:none;
+}
+</style>         
 @endsection
 <div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" >
@@ -43,7 +48,7 @@
                 <div class="flex mb-4">
                     <div class="w-1/4">
                         <label>
-                        Email
+                        Email <i class="text-red-400">*</i>
                         <p class="text-gray-400 text-sm">Selected Email(s) -> {{ count($checkedEmail) + count($allEmailCount) }}</p>
                         </label>
                     </div>
@@ -110,10 +115,10 @@
     <div id="email-modal" aria-hidden="true" class="hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center" wire:ignore.self>
         <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
             <!-- Modal content -->
-            <div class="bg-white rounded-lg shadow relative">
+            <div class="bg-white rounded-lg shadow relative dark:bg-gray-600">
                 <!-- Modal header -->
-                <div class="flex items-start justify-between p-5 border-b rounded-t">
-                    <h3 class="text-xl lg:text-2xl font-semibold">
+                <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-white">
+                    <h3 class="text-xl lg:text-2xl font-semibold dark:text-white">
                         Select Email
                     </h3>
                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="email-modal">
@@ -124,7 +129,7 @@
                 <div class="p-6 space-y-6">
                     <div class="flex mb-4">
                         <div class="w-2/4">
-                            <label>
+                            <label class="dark:text-white">
                             Search Email
                             <p class="text-gray-400 text-sm">Selected Email(s) -> {{ count($checkedEmail) + count($allEmailCount) }}</p>
                             </label>
@@ -149,7 +154,7 @@
                     <div class="flex mb-4">
                         <div class ="w-full">
                             <input class="ml-5 mr-5 rounded-3xl" wire:model="checkedAllEmail" type="checkbox" value="Select All">
-                            <label>Select All Email</span>
+                            <label class="dark:text-white">Select All Email</span>
                             <br>
                         </div>
                     </div>
@@ -169,10 +174,10 @@
     <div id="state-modal" aria-hidden="true" class="hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center" wire:ignore.self>
         <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
             <!-- Modal content -->
-            <div class="bg-white rounded-lg shadow relative">
+            <div class="bg-white rounded-lg shadow relative dark:bg-gray-600">
                 <!-- Modal header -->
-                <div class="flex items-start justify-between p-5 border-b rounded-t">
-                    <h3 class="text-xl lg:text-2xl font-semibold">
+                <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-white">
+                    <h3 class="text-xl lg:text-2xl font-semibold dark:text-white">
                         Select State
                     </h3>
                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="state-modal">
@@ -183,7 +188,7 @@
                 <div class="p-6 space-y-6">
                     <div class="flex mb-4">
                         <div class="w-2/4">
-                            <label for="searchEmail">
+                            <label class="dark:text-white" for="searchEmail">
                             State
                             <p class="text-gray-400 text-sm">Selected State(s) -> {{ count($checkedState) }} </p>
                             </label>
@@ -194,7 +199,7 @@
                                 @foreach ($states as $state)
                                     <input class="ml-5 mr-5 rounded-3xl" wire:model="checkedState" type="checkbox" value="{{$state->state}}"
                                     @if($checkedAllEmail == 'Select All') disabled style="cursor:not-allowed" @endif>
-                                    <label class="text-md">{{$state->state}}</label>
+                                    <label class="text-md dark:text-white">{{$state->state}}</label>
                                     <br>
                                 @endforeach
                             </div>

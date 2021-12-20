@@ -71,14 +71,14 @@
                             <div class="flex mb-4">
                                 <div class="w-1/4"></div>
                                 <div class="w-3/4">
-                                    <img src="{{ $logo->temporaryUrl() }}" alt="temp" style="width:250px;height:200px">
+                                    <img src="{{ $logo->temporaryUrl() }}" alt="temp" style="width:250px;height:200px" class="p-1 bg-white border rounded dark:border-black">
                                 </div>
                             </div>
                         @elseif($logos)
                             <div class="flex mb-4">
                                 <div class="w-1/4"></div>
                                 <div class="w-3/4">
-                                    <img src="{{ $logos }}" alt="temp" style="width:250px;height:200px">
+                                    <img src="{{ $logos }}" alt="temp" style="width:250px;height:200px" class="p-1 bg-white border rounded dark:border-black">
                                 </div>
                             </div>
                         @endif
