@@ -3,7 +3,7 @@
 {!!$message!!}
 
 <br>
-If you have any question, please contact us at 
+If you have any question, please contact us at {{config('mail.from.address')}}
 <br>
 
 Cheers,<br>

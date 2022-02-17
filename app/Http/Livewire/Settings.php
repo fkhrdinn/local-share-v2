@@ -5,12 +5,15 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Preference;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Settings extends Component
 {
+    use WithFileUploads;
+    
     public $user;
     public $currentPassword;
     public $newPassword;
@@ -105,6 +108,7 @@ class Settings extends Component
         else
         {
             Preference::where('user_id', $user->id)
+            ->where('key', 'facebook')
             ->update([
                 'value' => $this->facebook,
             ]);
@@ -122,6 +126,7 @@ class Settings extends Component
         else
         {
             Preference::where('user_id', $user->id)
+            ->where('key', 'twitter')
             ->update([
                 'value' => $this->twitter,
             ]);
@@ -139,6 +144,7 @@ class Settings extends Component
         else
         {
             Preference::where('user_id', $user->id)
+            ->where('key', 'instagram')
             ->update([
                 'value' => $this->instagram,
             ]);

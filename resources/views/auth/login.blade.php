@@ -17,6 +17,11 @@
             <div class="mt-4 text-sm">
                 Enter your e-mail and password to sign-in 
             </div>
+            @if($errors->has('email'))
+            <div class="mt-4 text-sm text-red-400 bg-red-200 rounded text-center">
+                These Credentials do not match our records.
+            </div>
+            @endif
             <!-- Email Address -->
             <div class="mt-4">
                 <label for="email">

@@ -34,8 +34,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     //Invoice
     Route::get('/invoices', 'InvoiceController@index')->name('invoices');
 
-    Route::get('/celebrities', 'CelebrityController@index')->name('celebrities');
-
     //Merchant
     Route::get('/merchants', 'MerchantController@index')->name('merchants');
 

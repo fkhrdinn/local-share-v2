@@ -14,21 +14,27 @@
             <div class="mr-0 lg:mr-5 lg:w-1/2 w-full">
                 <div>
                     <x-label for="name" :value="__('Name')" />
-
+                    @if($errors->has('name'))
+                        <div class="text-red-400 text-sm bg-red-200 rounded">Name is required or not valid.</div>
+                    @endif
                     <x-input id="name" class="block mt-1 w-full rounded-3xl" type="text" name="name" :value="old('name')" required autofocus />
                 </div>
 
                 <!-- Email Address -->
                 <div class="mt-4">
                     <x-label for="email" :value="__('Email')" />
-
+                    @if($errors->has('email'))
+                        <div class="text-red-400 text-sm bg-red-200 rounded">Email is required or not valid.</div>
+                    @endif
                     <x-input id="email" class="block mt-1 w-full rounded-3xl" type="email" name="email" :value="old('email')" required />
                 </div>
 
                 <!-- Password -->
                 <div class="mt-4">
                     <x-label for="password" :value="__('Password')" />
-
+                    @if($errors->has('name'))
+                        <div class="text-red-400 text-sm bg-red-200 rounded">Password is required.</div>
+                    @endif
                     <x-input id="password" class="block mt-1 w-full rounded-3xl"
                                     type="password"
                                     name="password"
@@ -38,7 +44,9 @@
                 <!-- Confirm Password -->
                 <div class="mt-4">
                     <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
+                    @if($errors->has('name'))
+                        <div class="text-red-400 text-sm bg-red-200 rounded">Password is required or do not match.</div>
+                    @endif
                     <x-input id="password_confirmation" class="block mt-1 w-full rounded-3xl"
                                     type="password"
                                     name="password_confirmation" required />
@@ -47,7 +55,9 @@
             <div class="ml-0 lg:ml-5 lg:w-1/2 w-full">
                 <div>
                     <x-label for="mobile" :value="__('Mobile Number')" />
-
+                    @if($errors->has('name'))
+                        <div class="text-red-400 text-sm bg-red-200 rounded">Mobile Number is required or not valid.</div>
+                    @endif
                     <x-input id="mobile" class="block mt-1 w-full rounded-3xl" type="text" name="mobile" required/>
                 </div>
             </div>
