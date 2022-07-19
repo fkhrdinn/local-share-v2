@@ -29,7 +29,8 @@ class CategoryTable extends PowerGridComponent
         $this->showCheckBox()
             ->showPerPage()
             ->showExportOption('download', ['excel', 'csv'])
-            ->showSearchInput();
+            ->showSearchInput()
+            ->showRecordCount();
     }
 
     /*

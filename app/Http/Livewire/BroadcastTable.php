@@ -30,7 +30,8 @@ class BroadcastTable extends PowerGridComponent
         $this->showCheckBox()
             ->showPerPage()
             ->showExportOption('download', ['excel', 'csv'])
-            ->showSearchInput();
+            ->showSearchInput()
+            ->showRecordCount();
     }
 
     /*
@@ -97,14 +98,12 @@ class BroadcastTable extends PowerGridComponent
                 ->title(__('SUBJECT'))
                 ->field('subject')
                 ->sortable()
-                ->searchable()
-                ->makeInputText(),
+                ->searchable(),
 
             Column::add()
                 ->title(__('MESSAGE'))
                 ->field('message')
                 ->sortable()
-                ->makeInputText()
                 ->searchable(),
 
             Column::add()

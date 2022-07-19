@@ -30,7 +30,8 @@ class FaqTable extends PowerGridComponent
             ->showPerPage()
             ->showExportOption('download', ['excel', 'csv'])
             ->showSearchInput()
-            ->showCheckBox();
+            ->showCheckBox()
+            ->showRecordCount();
     }
 
     /*
@@ -93,15 +94,13 @@ class FaqTable extends PowerGridComponent
                 ->title(__('TITLE'))
                 ->field('title')
                 ->sortable()
-                ->searchable()
-                ->makeInputText(),
+                ->searchable(),
 
             Column::add()
                 ->title(__('DESCRIPTION'))
                 ->field('description')
                 ->sortable()
-                ->searchable()
-                ->makeInputText(),
+                ->searchable(),
         ]
 ;
     }

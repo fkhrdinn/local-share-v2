@@ -2,11 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Status;
-use App\Models\Invoice;
-use App\Models\Product;
-use App\Models\Customer;
-use App\Models\InvoiceItem;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,7 +14,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 
-class InvoiceItemTable extends PowerGridComponent
+class RoleTable extends PowerGridComponent
 {
     use ActionButton;
 
@@ -30,11 +27,9 @@ class InvoiceItemTable extends PowerGridComponent
     */
     public function setUp()
     {
-        $this->showCheckBox()
-            ->showPerPage()
-            ->showExportOption('download', ['excel', 'csv'])
-            ->showSearchInput()
-            ->showRecordCount();
+        $this->showPerPage()
+            ->showRecordCount()
+            ->showSearchInput();
     }
 
     /*
@@ -46,7 +41,7 @@ class InvoiceItemTable extends PowerGridComponent
     */
     public function datasource(): ?Builder
     {
-        return InvoiceItem::query();
+        return Role::query();
     }
 
     /*
@@ -72,37 +67,10 @@ class InvoiceItemTable extends PowerGridComponent
     public function addColumns(): ?PowerGridEloquent
     {
         return PowerGrid::eloquent()
-        ->addColumn('customer', function(InvoiceItem $model) {
-            $invoice = Invoice::find($model->invoice_id);
-            $customer = Customer::find($invoice->customer_id);
-            return view('vendor.datatable.customer-detail', ['customer' => $customer, 'invoice' => $invoice]);
-        })
-        ->addColumn('product', function(InvoiceItem $model) {
-            $product = Product::find($model->product_id);
-            return view('vendor.datatable.product-invoice', ['invoice' => $model, 'product' => $product]);
-        })
-        ->addColumn('shipping_fee', function(InvoiceItem $model) {
-            $invoice = Invoice::where('id', $model->invoice_id)->value('shipping_fee');
-            return 'RM '.$invoice;
-        })
-        ->addColumn('amount', function(InvoiceItem $model) {
-            $price = $model->price * $model->quantity;
-            return 'RM '.$price;
-        })
-        ->addColumn('invoice_code', function(InvoiceItem $model) {
-            $invoice = Invoice::where('id', $model->invoice_id)->value('invoice_code');
-            return $invoice;
-        })
-        ->addColumn('paid_at_formatted', function(InvoiceItem $model) { 
-            $invoice = Invoice::where('id', $model->invoice_id)->first();
-            $date = Carbon::parse($invoice->paid_at)->format('d/m/Y H:i:s');
-            return $date;
-        })
-        ->addColumn('status', function(InvoiceItem $model) {
-            $invoice = Invoice::find($model->invoice_id);
-            $status = Status::find($invoice->status_id);
-            return $status->name;
-        });    
+            ->addColumn('name')
+            ->addColumn('user', function(Role $model) {
+                return User::role($model->name)->count(). ' users';
+            });
     }
 
     /*
@@ -116,48 +84,19 @@ class InvoiceItemTable extends PowerGridComponent
     public function columns(): array
     {
         return [
+
             Column::add()
-                ->title(__('CUSTOMER'))
-                ->field('customer')
+                ->title(__('NAME'))
+                ->field('name')
+                ->sortable()
+                ->searchable(),
+            
+            Column::add()
+                ->title(__('USER'))
+                ->field('user')
                 ->sortable()
                 ->searchable(),
 
-            Column::add()
-                ->title(__('PRODUCT'))
-                ->field('product')
-                ->sortable()
-                ->searchable(),
-
-            Column::add()
-                ->title(__('SHIPPING FEE'))
-                ->field('shipping_fee')
-                ->sortable()
-                ->searchable(),
-
-            Column::add()
-                ->title(__('TOTAL AMOUNT'))
-                ->field('amount')
-                ->sortable()
-                ->searchable(),
-
-            Column::add()
-                ->title(__('INVOICE CODE'))
-                ->field('invoice_code')
-                ->sortable()
-                ->searchable(),
-
-            Column::add()
-                ->title(__('PAID AT'))
-                ->field('paid_at_formatted')
-                ->searchable()
-                ->sortable()
-                ->makeInputDatePicker('paid_at'),
-
-            Column::add()
-                ->title(__('STATUS'))
-                ->field('status')
-                ->searchable()
-                ->sortable(),
         ]
 ;
     }
@@ -177,12 +116,12 @@ class InvoiceItemTable extends PowerGridComponent
            Button::add('edit')
                ->caption(__('Edit'))
                ->class('bg-indigo-500 text-white')
-               ->route('invoice-item.edit', ['invoice-item' => 'id']),
+               ->route('role.edit', ['role' => 'id']),
 
            Button::add('destroy')
                ->caption(__('Delete'))
                ->class('bg-red-500 text-white')
-               ->route('invoice-item.destroy', ['invoice-item' => 'id'])
+               ->route('role.destroy', ['role' => 'id'])
                ->method('delete')
         ];
     }
@@ -200,7 +139,7 @@ class InvoiceItemTable extends PowerGridComponent
     public function update(array $data ): bool
     {
        try {
-           $updated = InvoiceItem::query()->find($data['id'])->update([
+           $updated = Role::query()->find($data['id'])->update([
                 $data['field'] => $data['value']
            ]);
        } catch (QueryException $exception) {

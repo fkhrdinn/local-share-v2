@@ -31,7 +31,7 @@ class ProductTable extends PowerGridComponent
         $this->showCheckBox()
             ->showPerPage()
             ->showExportOption('download', ['excel', 'csv'])
-            ->showSearchInput();
+            ->showRecordCount();
     }
 
     /*
